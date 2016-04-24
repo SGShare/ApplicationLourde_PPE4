@@ -10,38 +10,33 @@ using System.Windows.Forms;
 
 namespace ApplicationLourde_PPE4
 {
-    public partial class FormInsertionBDD : Form
+    public partial class FormLogin : Form
     {
-        public FormInsertionBDD()
+        public FormLogin()
         {
             InitializeComponent();
-            
         }
 
-        private void importToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ValidLogin_Click(object sender, EventArgs e)
         {
-           controleur.init();
+  
+            controleur.init();
             controleur.Vmodele.seconnecter();
             if (controleur.Vmodele.Connopen == false)
             {
-                MessageBox.Show("Erreur ouverture bdd : ", "PBS Connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Erreur ouverture bdd ", "PBS Connexion", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
                 controleur.Vmodele.import();
                 if (controleur.Vmodele.Chargement == true)
                 {
-                    
+                    MessageBox.Show("Connexion à la BDD réussis ", "Connexion OK", MessageBoxButtons.OK);
                 }
             }
             controleur.Vmodele.sedeconnecter();
-           
-           
-        }
-
-        private void FormInsertionBDD_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            controleur.Vmodele.sedeconnecter();
+            FormPrincipale FP  = new FormPrincipale();
+            FP.Show(); 
         }
     }
 }
